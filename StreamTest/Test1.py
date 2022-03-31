@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
+import plotly.express as px
 
 
 st.title('Uber pickups in NYC')
@@ -48,7 +49,13 @@ fig = go.Figure(data=[
 fig.update_layout(barmode='group')
 
 st.plotly_chart(fig, use_container_width=True)
+data = px.data.gapminder()
 
+data_canada = data[data.country == 'Canada']
+fig = px.bar(data_canada, x='year', y='pop',
+             hover_data=['lifeExp', 'gdpPercap'], color='lifeExp',
+             labels={'pop':'population of Canada'}, height=400)
+st.plotly_chart(fig, use_container_width=True)
 chart_data = pd.DataFrame(
      np.random.randn(20, 3),
      columns=['a', 'b', 'c'])
