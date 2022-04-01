@@ -62,6 +62,11 @@ df = px.data.iris()  # px自带数据集
 fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species",
                  size='petal_length', hover_data=['petal_width'])
 st.plotly_chart(fig, use_container_width=True)
+
+df.loc[df['pop'] < 2.e6, 'country'] = 'Other countries' # Represent only large countries
+fig = px.pie(df, values='pop', names='country', title='Population of European continent')
+st.plotly_chart(fig, use_container_width=True)
+
 chart_data = pd.DataFrame(
      np.random.randn(20, 3),
      columns=['a', 'b', 'c'])
